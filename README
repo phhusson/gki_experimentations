@@ -1,0 +1,2 @@
+repo init -u https://android.googlesource.com/kernel/manifest/ -b common-android11-5.4
+repo sync
