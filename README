@@ -1,2 +1,27 @@
 repo init -u https://android.googlesource.com/kernel/manifest/ -b common-android11-5.4
 repo sync
+sudo apt install libabigail-dev elfutils libdw-dev libasm-dev
+bash build/abi/bootstrap
+
+export PATH="/home/phh/Android/GKI/build/abi/abigail-inst/16555aa4/bin:${PATH}"
+export LD_LIBRARY_PATH="/home/phh/Android/GKI/build/abi/abigail-inst/16555aa4/lib:/home/phh/Android/GKI/build/abi/abigail-inst/16555aa4/lib/elfutils:${LD_LIBRARY_PATH}"
+
+BUILD_CONFIG=common/build.config.gki.aarch64 build/build_abi.sh
+cp build.config.db845c => build.config.ubports, edit defconfig path, edit defconfig fragment, add options
+BUILD_CONFIG=common/build.config.ubports build/build_abi.sh
+
+
+
+
+
+
+#TODO CHECK FOR HALIUM
+CONFIG_DEVTMPFS=y
+CONFIG_VT=y
+CONFIG_NAMESPACES=y #Already here
+CONFIG_MEMCG=y #Already here
+CONFIG_CGROUP_DEVICE=y
+CONFIG_CGROUP_SCHEDTUNE=n #Already here
+CONFIG_SYSVIPC=y
+CONFIG_FANOTIFY=y
+CONFIG_SECURITY_APPARMOR=y
